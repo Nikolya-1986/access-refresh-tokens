@@ -5,15 +5,19 @@ import {
     Get,
     Param,
     Post,
+    UseGuards,
 } from '@nestjs/common';
-  
+
+import { JwtGuard } from '../auth/guards/jwt-auth.guard';
+import { CommentService } from '../comment/comment.service';
 import { CreateUserDto } from './dto/createUserDto';
 import { UserService } from './user.service';
   
-  @Controller('user')
-  export class UserController {
+@Controller('user')
+export class UserController {
     constructor(
         private readonly userService: UserService,
+        private readonly commentService: CommentService,
     ) {}
   
     @Get(':id')
@@ -25,4 +29,10 @@ import { UserService } from './user.service';
     create(@Body() createUserDto: CreateUserDto) {
         return this.userService.create(createUserDto);
     }
-}
+  
+    @UseGuards(JwtGuard)
+    @Get(':id/comments')
+    getUserComment(@Param('id') id: string) {
+        return this.commentService.findUserComments(id);
+    }
+  }

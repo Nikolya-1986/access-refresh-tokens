@@ -7,9 +7,10 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import config from 'ormconfig';
 import { UserModule } from './user/user.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
-  imports: [UserModule, TypeOrmModule.forRoot(config), AuthModule],
+  imports: [UserModule, CommentModule, TypeOrmModule.forRoot(config), AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-// eslint-disable-next-line prettier/prettier
 import { PartialType } from '@nestjs/mapped-types';
 import { IsEmail, IsString } from 'class-validator';
 
